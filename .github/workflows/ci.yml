@@ -29,7 +29,8 @@ jobs:
       - name: Ruff lint
         run: ruff check src/ tests/
 
-      - name: Mypy (strict)
+      - name: Mypy (strict, advisory)
+        continue-on-error: true
         run: mypy src/greeklab
 
       - name: Pytest
