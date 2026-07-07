@@ -1,0 +1,9 @@
+# Requirements for the greeklab dashboard (app/dashboard.py).
+# Install the core library itself first (from the repo root):
+#   pip install -e .
+# then:
+#   pip install -r app/requirements.txt
+# or simply:
+#   pip install -e ".[app]"
+streamlit>=1.35
+plotly>=5.20

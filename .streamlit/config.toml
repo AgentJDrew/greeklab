@@ -1,0 +1,21 @@
+# Streamlit config for the greeklab dashboard (app/dashboard.py).
+#
+# Discovery note: Streamlit resolves .streamlit/config.toml relative to
+# the CURRENT WORKING DIRECTORY at invocation time, not the script's
+# own directory. Run the app from the repo root:
+#   streamlit run app/dashboard.py
+# so this file (<repo-root>/.streamlit/config.toml) is picked up.
+
+[theme]
+base = "dark"
+primaryColor = "#2dd4bf"
+backgroundColor = "#0e1117"
+secondaryBackgroundColor = "#161b22"
+textColor = "#e6edf3"
+font = "sans serif"
+
+[server]
+headless = true
+
+[browser]
+gatherUsageStats = false

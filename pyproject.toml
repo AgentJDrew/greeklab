@@ -1,0 +1,91 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "greeklab"
+version = "0.1.0"
+description = "A rigorous options and derivatives pricing library: Black-Scholes-Merton, binomial trees, Monte Carlo with variance reduction, exotics (Asian/Barrier/American-LSM), and Heston stochastic volatility via Fourier inversion."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+    { name = "Andrew Lazzeroni", email = "andrewlazz8@gmail.com" },
+]
+keywords = [
+    "options",
+    "derivatives",
+    "quantitative-finance",
+    "black-scholes",
+    "heston",
+    "stochastic-volatility",
+    "monte-carlo",
+    "greeks",
+    "implied-volatility",
+    "quant",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Financial and Insurance Industry",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Office/Business :: Financial",
+    "Topic :: Scientific/Engineering :: Mathematics",
+    "Typing :: Typed",
+]
+dependencies = [
+    "numpy>=1.24",
+    "scipy>=1.10",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4",
+    "pytest-cov>=4.1",
+    "ruff>=0.5",
+    "mypy>=1.10",
+]
+# Optional interactive dashboard (app/dashboard.py). The core library
+# stays numpy+scipy only -- these are never imported outside app/, and
+# are not required to install or use greeklab itself.
+app = [
+    "streamlit>=1.35",
+    "plotly>=5.20",
+]
+
+[project.urls]
+Homepage = "https://github.com/AgentJDrew/greeklab"
+Repository = "https://github.com/AgentJDrew/greeklab"
+Issues = "https://github.com/AgentJDrew/greeklab/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/greeklab"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "NPY"]
+ignore = ["E501"]
+
+[tool.mypy]
+# Note: this is mypy's *checking* target, not a statement about the
+# library's minimum supported Python version (that's `requires-python`
+# above, and the 3.10-3.13 CI matrix in .github/workflows/ci.yml). It
+# is pinned to 3.12 here only because NumPy 2.x's bundled .pyi stubs
+# use a `type X = ...` alias statement that requires mypy to parse
+# against >=3.12 syntax rules, regardless of what Python features
+# greeklab's own source actually uses (none newer than 3.10).
+python_version = "3.12"
+strict = true
+warn_unused_ignores = true
